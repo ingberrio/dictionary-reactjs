@@ -1,0 +1,10 @@
+.collasible{
+    margin-right: 20px;
+    border-right: 1px solid rgb(163, 174, 239);
+    padding: 0 10px 0 0;
+}
+
+.dark-navbar {
+    background-color: #7b7a7a;
+    color: #fff;
+  }
