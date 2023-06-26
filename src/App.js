@@ -31,7 +31,7 @@ const SearchForm = ({ onSearch }) => {
 
 const SearchResult = ({ word, meanings, phonetic, phonetics, sourceUrls }) => {
   const playAudio = (audioUrl) => new Audio(audioUrl).play();
-  
+
   return(
   <div className='container'>
     <div className='content-header'>
@@ -56,30 +56,27 @@ const SearchResult = ({ word, meanings, phonetic, phonetics, sourceUrls }) => {
         </div>
     </div>
     <div className='cont'>
-    {meanings.length > 0 && (
-        <div className='text-start border-bottom'>
-          <h3>{meanings[0].partOfSpeech}</h3>
-          <div className='text-start border-bottom'></div>
-          <br />
-          <div className='text-start text-muted'><h5>Meaning</h5></div>
-          <ul>
-            <li>{meanings[0].definitions[0].definition}</li>
-            <li>{meanings[0].definitions[1].definition}</li>
-            <li>{meanings[0].definitions[2].definition}</li>
-          </ul>
-          <br />
-          <div className='text-start text-muted'><h5>Synonyms</h5></div>
-          <p>{meanings[0].synonyms[0]}</p>
-          <h3>{meanings[1].partOfSpeech}</h3>
-          <div className='text-start border-bottom'></div>
-          <br />
-          <div className='text-start text-muted'><h5>Meaning</h5></div>
-          <ul>
-            <li>{meanings[1].definitions[0].definition}</li>
-            <div className='text-muted'>{meanings[1].definitions[0].example}</div>
-          </ul>
+    {meanings.map((meaning) => (
+      <div className='text-start border-bottom'>
+        <h3>{meaning.partOfSpeech}</h3>
+        <div className='text-start border-bottom'></div>
+        <br />
+        <div className='text-start text-muted'><h5>Meaning</h5></div>
+          
+        <div key={meaning.partOfSpeech}>
+          {meaning.definitions.map((definition) => (
+            <ul>
+              <li>
+              <p key={definition.definition}>{definition.definition}</p>
+              <div className='text-muted'>{definition.example}</div>
+              </li>
+            </ul>
+          ))}
         </div>
-    )}
+        <div className='text-start text-muted'><h5>Synonyms</h5></div>
+          <p>{meanings[0].synonyms[0]}</p>
+      </div>
+    ))}
     
     {sourceUrls && (
         <div className="sourceUrls">
